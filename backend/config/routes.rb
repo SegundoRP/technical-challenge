@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:index] do
-        resources :repositories, only: [:index]
+        resources :repositories, only: [:index] do
+          collection do
+            get 'search/:query', to: 'repositories#search'
+          end
+        end
       end
     end
   end
